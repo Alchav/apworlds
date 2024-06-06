@@ -181,7 +181,7 @@ class LogicWaterTempleNorthBasementLedgewWithPreciseJump(Toggle):
 class LogicWaterMQCentralPillarWithFireArrows(Toggle):
     """Enable the "Water Temple MQ Central Pillar with Fire Arrows" trick to logic, which may require you to light the
     torches in the Central Pillar with Fire Arrows."""
-    display_name = "Logic: Water Temple MQ Central Pillar with Fire Arrows"
+    display_name = "Logic: Water MQ Central Pillar with Fire Arrows"
 
 
 class LogicWaterTempleMQNorthBasementGSWithoutSmallKey(Toggle):
@@ -195,17 +195,6 @@ class LogicLakeHyliaLabDive(Toggle):
     the midst of hookshotting the crate, to trick the scientist into thinking you're a great swimmer.
     Only relevant if shuffle_warp_songs is on."""
     display_name = "Logic: Lake Hylia Lab Dive without Gold Scale"
-
-
-class LogicBongoBongoWithoutLensOfTruth(Toggle):
-    """Enable the "Shadow Temple Bongo Bongo without Lens of Truth" trick to logic."""
-    display_name = "Logic: Shadow Temple Bongo Bongo without Lens of Truth"
-
-
-class LogicDodongosCavernSmashtheBossLobbyFloor(Toggle):
-    """Enable the "Dodongo's Cavern Smash the Boss Lobby Floor" trick to logic. The bombable floor before King Dodongo
-    can be destroyed with Hammer if hit in the very center."""
-    display_name = "Logic: Dodongo's Cavern Smash the Boss Lobby Floor"
 
 
 def init_mixin(self, parent):
@@ -242,16 +231,12 @@ class OOTBIJMQWTWorld(OOTWorld):
                           "logic_lab_diving": LogicLakeHyliaLabDive,
                           "logic_water_dragon_jump_dive": LogicWaterDragonJumpDive,
                           "logic_water_north_basement_ledge_jump": LogicWaterTempleNorthBasementLedgewWithPreciseJump,
-                          "logic_dc_hammer_floor": LogicDodongosCavernSmashtheBossLobbyFloor,
-                          "logic_lens_bongo": LogicBongoBongoWithoutLensOfTruth,
                           **oot_options}
 
     topology_present: bool = False
     item_name_to_id = OOTWorld.item_name_to_id
     location_name_to_id = OOTWorld.location_name_to_id
     web = OOTWorld.web
-
-    data_version = OOTWorld.data_version
 
     required_client_version = OOTWorld.required_client_version
 
@@ -295,8 +280,7 @@ class OOTBIJMQWTWorld(OOTWorld):
                 multiworld.local_items[world.player].value.add("Boss Key (Water Temple)")
             multiworld.free_scarecrow[world.player].value = multiworld.enable_scarecrow[world.player].value
             for trick in ["logic_fewer_tunic_requirements", "logic_water_mq_central_pillar", "logic_water_mq_locked_gs",
-                          "logic_lab_diving", "logic_water_dragon_jump_dive", "logic_water_north_basement_ledge_jump",
-                          "logic_dc_hammer_floor", "logic_lens_bongo"]:
+                          "logic_lab_diving", "logic_water_dragon_jump_dive", "logic_water_north_basement_ledge_jump"]:
                 if getattr(multiworld, trick)[world.player]:
                     multiworld.logic_tricks[world.player].value.append(getattr(multiworld, trick)[world.player].display_name.split(": ")[1].casefold())
 
